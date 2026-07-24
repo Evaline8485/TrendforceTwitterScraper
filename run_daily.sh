@@ -83,8 +83,16 @@ if ! grep -q "@TrendForce: scraping recent tweets" "$ACCOUNTS_LOG" || grep -q "\
 fi
 rm -f "$ACCOUNTS_LOG"
 
-npm run scrape:watchlist || { echo "[WARN] scrape:watchlist failed"; FAILURES+=("watchlist scrape"); }
-npm run scrape:competitors || { echo "[WARN] scrape:competitors failed"; FAILURES+=("competitor scrape"); }
+# Watchlist/competitor scraping used to run every slot (6x/day, same as
+# the rest of this script) - cut to once/day (2026-07-24) since neither
+# changes fast enough to need a 4h refresh; only the 00:30 slot runs it,
+# the other five slots skip straight to video-discovery.
+if [ "$(date +%H)" = "00" ]; then
+  npm run scrape:watchlist || { echo "[WARN] scrape:watchlist failed"; FAILURES+=("watchlist scrape"); }
+  npm run scrape:competitors || { echo "[WARN] scrape:competitors failed"; FAILURES+=("competitor scrape"); }
+else
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Skipping watchlist/competitor scrape (once/day, 00:30 slot only)."
+fi
 npm run scrape:video-discovery || { echo "[WARN] scrape:video-discovery failed"; FAILURES+=("video discovery scrape"); }
 
 # Update and publish the dashboard to GitHub Pages
