@@ -36,7 +36,7 @@ const sinceArg = process.argv.includes('--since') ? process.argv[process.argv.in
 const sinceDate = sinceArg || new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 if (sinceArg) console.log(`Running with custom since date: ${sinceDate}`);
 
-// 13 query batches (3 fixed + up to 10 Rising Topics) at 15 scrolls each
+// Up to 8 query batches (3 fixed + up to 5 Rising Topics) at 15 scrolls each
 // was adding 60-130+ min to the shared run_daily.sh schedule (found
 // 2026-07-24: daily runs went from ~35min to 69min-4h after this script
 // was added to it) - 10 is enough to catch what's genuinely new on a 4h
@@ -71,7 +71,13 @@ const SEARCH_QUERIES = KEYWORD_BATCHES.map((terms) => {
 // directly), so reading its analysis output the same way isn't a new kind
 // of cross-repo dependency, just the reverse direction of an existing one.
 const RISING_TOPICS_FILE = '/Users/elainekao/TrendForceDash/analysis/fuzzy_trends_1d.json';
-const MAX_RISING_TOPICS = 10;
+// Cut 10 -> 5 (2026-07-24, alongside the scroll-depth reduction above) -
+// this script's 13 query batches (3 fixed + up to 10 Rising Topics) were
+// still the single biggest remaining cost in run_daily.sh's 6x/day
+// schedule (~30min/run just here). Keeping only the top 5 by rising_score
+// still covers the topics most likely to actually have new video content,
+// at roughly half the batches' worth of scroll time.
+const MAX_RISING_TOPICS = 5;
 
 // Each topic's label is already an OR-able keyword set (topic_clusters.py's
 // label_cluster() joins a cluster's top terms with " / ", e.g.
