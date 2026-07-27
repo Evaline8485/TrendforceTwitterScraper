@@ -107,8 +107,20 @@ async function scrapeFollowers(page, handle) {
   }
 }
 
-const ALL_ACCOUNTS = ['@TrendForce', '@technews_tw', '@dylan522p', '@jukan05', '@QQ_Timmy', '@SemiAnalysis_',
-  '@tphuang', '@tengyanAI'];
+// Read from TrendForceDash's accounts_config.json (own + competitors)
+// rather than keeping a second, separately-maintained handle list here -
+// found 2026-07-27: nvidianewsroom and FT were added to accounts_config.json
+// (via add_account.py) but never made it into this file's own hardcoded
+// array, so they silently never got scraped despite showing as "tracked"
+// everywhere else. Same cross-repo absolute-path read already used by
+// scrape_video_discovery.js for TrendForceDash's fuzzy_trends_1d.json.
+const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
+function loadAllAccounts() {
+  const cfg = JSON.parse(fs.readFileSync(ACCOUNTS_CONFIG_FILE, 'utf8'));
+  const x = cfg.X || {};
+  return [...(x.own || []), ...(x.competitors || [])].map((h) => `@${h.replace(/^@/, '')}`);
+}
+const ALL_ACCOUNTS = loadAllAccounts();
 // Optional: `node scrape_accounts.js @Handle1 @Handle2` scrapes only those
 // accounts (used by run_daily.sh to retry just @TrendForce if it got missed
 // earlier in a run). No handle args = scrape everything, as before.
