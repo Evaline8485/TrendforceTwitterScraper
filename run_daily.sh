@@ -65,6 +65,15 @@ disown
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting daily run..."
 
+# Captured once, at the START of the run - found 2026-07-27: checking
+# date +%H right before the watchlist/competitor gate (below) meant a slow
+# mention/account scrape ahead of it could push the wall clock into the
+# next hour before the gate ever ran, so the 00:30 slot's own watchlist
+# scrape got silently skipped because it didn't finish evaluating the
+# check until 08:18. This ties the gate to which SLOT triggered this run,
+# not whatever hour happens to be current whenever execution reaches it.
+RUN_HOUR=$(date +%H)
+
 FAILURES=()
 
 # Clear mention scraper cache so it does a fresh scrape each day
@@ -99,7 +108,7 @@ rm -f "$ACCOUNTS_LOG"
 # the rest of this script) - cut to once/day (2026-07-24) since neither
 # changes fast enough to need a 4h refresh; only the 00:30 slot runs it,
 # the other five slots skip straight to video-discovery.
-if [ "$(date +%H)" = "00" ]; then
+if [ "$RUN_HOUR" = "00" ]; then
   npm run scrape:watchlist || { echo "[WARN] scrape:watchlist failed"; FAILURES+=("watchlist scrape"); }
   npm run scrape:competitors || { echo "[WARN] scrape:competitors failed"; FAILURES+=("competitor scrape"); }
 else
