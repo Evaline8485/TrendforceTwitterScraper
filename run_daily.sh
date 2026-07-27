@@ -51,6 +51,18 @@ schedule_next_wake() {
 }
 schedule_next_wake
 
+# schedule_next_wake above only fixes the Mac being fully asleep BEFORE this
+# run's own start time - it does nothing once the run is actually in
+# progress. Found 2026-07-27 (TrendforceFacebookScraper/run_all.sh): a run
+# left unattended can drift into Deep Idle/Power Nap dark-wake cycling
+# mid-scrape, throttling network access and making page loads/scrolls crawl
+# for hours instead of minutes. caffeinate -i -w $$ blocks idle sleep for
+# exactly this script's own lifetime (tied to our PID, so it exits on its
+# own when we do); doesn't override a user-initiated sleep, only the
+# automatic idle path.
+caffeinate -i -w $$ &
+disown
+
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting daily run..."
 
 FAILURES=()
