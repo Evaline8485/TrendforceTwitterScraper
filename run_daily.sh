@@ -90,8 +90,22 @@ ACCOUNTS_LOG=$(mktemp)
 npm run scrape:accounts 2>&1 | tee "$ACCOUNTS_LOG"
 ACCOUNTS_EXIT=${PIPESTATUS[0]:-$?}
 if [ "$ACCOUNTS_EXIT" -ne 0 ]; then
-  echo "[WARN] scrape:accounts failed"
-  FAILURES+=("account scrape")
+  # A nonzero exit here can mean just ONE handle hit a normal transient
+  # blip (page-load timeout, etc.) - @TrendForce specifically already has
+  # a dedicated retry right below, which reliably recovers this exact
+  # case (found 2026-08-02/03: both real-world "account scrape failed"
+  # alerts were @TrendForce alone, and the retry succeeded within the same
+  # run both times) - alerting on "account scrape" anyway paged for
+  # something that had already self-healed by the time this script even
+  # finished. Only treat this as a real failure if some OTHER handle also
+  # failed, since nothing else here has an equivalent retry path.
+  OTHER_FAILED=$(grep '^Completed with failures on:' "$ACCOUNTS_LOG" | sed 's/^Completed with failures on: //' | tr ',' '\n' | sed 's/^ *//;s/^@//;s/ *$//' | grep -vx 'TrendForce')
+  if [ -n "$OTHER_FAILED" ]; then
+    echo "[WARN] scrape:accounts failed for: $(echo "$OTHER_FAILED" | tr '\n' ',' | sed 's/,$//')"
+    FAILURES+=("account scrape")
+  else
+    echo "[WARN] scrape:accounts failed, but only for @TrendForce - the dedicated retry below will confirm whether that's a real failure."
+  fi
 fi
 
 if ! grep -q "@TrendForce: scraping recent tweets" "$ACCOUNTS_LOG" || grep -q "\[!\] @TrendForce failed" "$ACCOUNTS_LOG"; then
