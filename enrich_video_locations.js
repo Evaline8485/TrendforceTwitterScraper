@@ -54,10 +54,17 @@ function loadDiscoveryHandles() {
   if (handleIdx === -1) return [];
   const handles = new Set();
   for (let i = 1; i < lines.length; i++) {
-    // Plain split is good enough here - handle values are bare alnum
-    // usernames with no commas/quotes to worry about, unlike text/topic.
+    // Plain split on the raw line is still fine for finding the handle
+    // COLUMN (it's a comma-free field that comes before text/topic, whose
+    // embedded commas only ever shift columns AFTER them) - but
+    // scrape_video_discovery.js's safe() writer wraps every field in
+    // literal double quotes ("@handle"), which a plain split does NOT
+    // strip. Found 2026-08-03: uncached handles like '"@WizzyXchangeBet"'
+    // (quotes included) were being looked up as-is, wasting this run's
+    // limited MAX_LOOKUPS_PER_RUN slots on profile URLs that never
+    // existed instead of real accounts.
     const cols = lines[i].split(',');
-    const h = (cols[handleIdx] || '').trim().replace(/^@/, '');
+    const h = (cols[handleIdx] || '').trim().replace(/^"|"$/g, '').replace(/^@/, '');
     if (h) handles.add(h);
   }
   return [...handles];
