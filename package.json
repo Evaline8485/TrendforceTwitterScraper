@@ -10,6 +10,7 @@
     "rescrape:full": "node rescrape_full.js",
     "scrape:competitors": "node scrape_competitors.js",
     "scrape:video-discovery": "node scrape_video_discovery.js",
+    "enrich:video-locations": "node enrich_video_locations.js",
     "scrape:plagiarism": "node scrape_plagiarism.js",
     "analyze": "python3 analyze_engagement.py",
     "analyze:competitors": "python3 analyze_competitors.py",

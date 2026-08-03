@@ -130,6 +130,15 @@ else
 fi
 npm run scrape:video-discovery || { echo "[WARN] scrape:video-discovery failed"; FAILURES+=("video discovery scrape"); }
 
+# Backfills account_locations.json (profile-location cache) for X Video
+# Ranking's region filter - bounded to MAX_LOOKUPS_PER_RUN new handles per
+# run (see enrich_video_locations.js) so a day with many newly discovered
+# accounts doesn't turn this into an hours-long step; the remainder just
+# gets picked up on a later run. Not a hard failure if it errors - the
+# region filter degrades to "unknown" for whatever wasn't looked up yet,
+# it doesn't block anything else.
+npm run enrich:video-locations || echo "[WARN] enrich:video-locations failed (non-fatal - region data just stays incomplete for now)"
+
 # Update and publish the dashboard to GitHub Pages
 # (publish.sh sends its own alert on CSV-validation/push/deploy failures)
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Running publish..."
