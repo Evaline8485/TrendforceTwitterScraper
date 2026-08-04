@@ -29,7 +29,7 @@ const SESSION_FILE = path.join(__dirname, 'session.json');
 const LOCATION_CACHE_FILE = path.join(__dirname, 'account_locations.json');
 const VIDEO_DISCOVERY_CSV = path.join(__dirname, 'csv', 'video_discovery.csv');
 const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
-const MAX_LOOKUPS_PER_RUN = 40;
+const MAX_LOOKUPS_PER_RUN = 100;
 
 const locationCache = fs.existsSync(LOCATION_CACHE_FILE)
   ? JSON.parse(fs.readFileSync(LOCATION_CACHE_FILE, 'utf8'))
