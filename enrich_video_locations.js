@@ -88,17 +88,31 @@ async function getLocation(page, handle) {
 }
 
 async function main() {
-  const allHandles = [...new Set([...loadTrackedXHandles(), ...loadDiscoveryHandles()])];
-  const uncached = allHandles.filter((h) => locationCache[h] === undefined);
-  console.log(`${allHandles.length} unique handle(s) in the video-ranking pool, ${uncached.length} not yet cached.`);
-  if (uncached.length === 0) {
-    console.log('Nothing new to look up.');
-    return;
-  }
+  // Optional `node enrich_video_locations.js @handle1 @handle2 ...` -
+  // same pattern as scrape_accounts.js's own handle-list override - looks
+  // up exactly those handles (re-checking even if already cached, so this
+  // doubles as a manual refresh) instead of scanning the whole pool. Used
+  // to prioritize a specific set (e.g. whatever's currently in the top 30
+  // shown on the dashboard) ahead of the general backlog.
+  const explicitHandles = process.argv.slice(2).filter((a) => a.startsWith('@')).map((a) => a.slice(1));
 
-  const toFetch = uncached.slice(0, MAX_LOOKUPS_PER_RUN);
-  if (uncached.length > toFetch.length) {
-    console.log(`Bounding this run to ${toFetch.length} lookup(s); ${uncached.length - toFetch.length} remaining for future runs.`);
+  let toFetch;
+  if (explicitHandles.length > 0) {
+    toFetch = explicitHandles;
+    console.log(`Looking up ${toFetch.length} explicitly-requested handle(s), ignoring the cache/bound.`);
+    for (const h of toFetch) delete locationCache[h];
+  } else {
+    const allHandles = [...new Set([...loadTrackedXHandles(), ...loadDiscoveryHandles()])];
+    const uncached = allHandles.filter((h) => locationCache[h] === undefined);
+    console.log(`${allHandles.length} unique handle(s) in the video-ranking pool, ${uncached.length} not yet cached.`);
+    if (uncached.length === 0) {
+      console.log('Nothing new to look up.');
+      return;
+    }
+    toFetch = uncached.slice(0, MAX_LOOKUPS_PER_RUN);
+    if (uncached.length > toFetch.length) {
+      console.log(`Bounding this run to ${toFetch.length} lookup(s); ${uncached.length - toFetch.length} remaining for future runs.`);
+    }
   }
 
   const browser = await chromium.launch({
