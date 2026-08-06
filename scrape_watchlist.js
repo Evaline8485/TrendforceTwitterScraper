@@ -241,13 +241,15 @@ async function main() {
       console.log('Delete raw_watchlist.json to start a fresh scrape.\n');
     } else {
       for (let qi = 0; qi < SEARCH_QUERIES.length; qi++) {
-        const tweets = await scrapeTweets(page, SEARCH_QUERIES[qi], 15);
+        // Cut 15 -> 8 (2026-08-05) - the account got suspended for
+        // crawling too fast; see scrape_accounts.js's maxScrolls comment.
+        const tweets = await scrapeTweets(page, SEARCH_QUERIES[qi], 8);
         allTweets.push(...tweets);
         fs.writeFileSync(RAW_FILE, JSON.stringify(allTweets, null, 2));
         // Cooldown between batches to avoid rate limiting
         if (qi < SEARCH_QUERIES.length - 1) {
-          console.log('  Cooling down 10s before next batch...');
-          await page.waitForTimeout(10000);
+          console.log('  Cooling down 20s before next batch...');
+          await page.waitForTimeout(20000);
         }
       }
     }

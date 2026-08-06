@@ -29,7 +29,13 @@ const SESSION_FILE = path.join(__dirname, 'session.json');
 const LOCATION_CACHE_FILE = path.join(__dirname, 'account_locations.json');
 const VIDEO_DISCOVERY_CSV = path.join(__dirname, 'csv', 'video_discovery.csv');
 const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
-const MAX_LOOKUPS_PER_RUN = 100;
+// Cut back down 100 -> 20 (2026-08-05, one day after bumping 40 -> 100):
+// the account got suspended for crawling too fast, and 100 extra profile
+// page-loads per run on top of every other scraper hitting this same
+// account is a real suspect given the timing. 20/run means a much slower
+// backfill (~145 days for the full ~2900-account pool instead of ~5), but
+// getting the account back matters more than region-filter completeness.
+const MAX_LOOKUPS_PER_RUN = 20;
 
 const locationCache = fs.existsSync(LOCATION_CACHE_FILE)
   ? JSON.parse(fs.readFileSync(LOCATION_CACHE_FILE, 'utf8'))
@@ -141,6 +147,12 @@ async function main() {
       const location = await getLocation(page, handle);
       console.log(location || 'not set');
       if (i % 10 === 9) fs.writeFileSync(LOCATION_CACHE_FILE, JSON.stringify(locationCache, null, 2));
+      // Added 2026-08-05 (account got suspended for crawling too fast) -
+      // this loop had NO pause between profile page-loads at all, unlike
+      // every other scraper here which at least pauses between scrolls/
+      // batches. A back-to-back tight loop of profile visits is exactly
+      // the kind of pattern anti-bot detection flags.
+      if (i < toFetch.length - 1) await page.waitForTimeout(3000);
     }
   } finally {
     fs.writeFileSync(LOCATION_CACHE_FILE, JSON.stringify(locationCache, null, 2));

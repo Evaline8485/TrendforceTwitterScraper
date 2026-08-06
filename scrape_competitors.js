@@ -172,11 +172,13 @@ async function main() {
 
     for (let qi = 0; qi < SEARCH_QUERIES.length; qi++) {
       const { label, query } = SEARCH_QUERIES[qi];
-      const tweets = await scrapeTweets(page, query, label, 15);
+      // Cut 15 -> 8 (2026-08-05) - the account got suspended for crawling
+      // too fast; see scrape_accounts.js's maxScrolls comment.
+      const tweets = await scrapeTweets(page, query, label, 8);
       allTweets.push(...tweets);
       if (qi < SEARCH_QUERIES.length - 1) {
-        console.log('  Cooling down 10s...');
-        await page.waitForTimeout(10000);
+        console.log('  Cooling down 20s...');
+        await page.waitForTimeout(20000);
       }
     }
 

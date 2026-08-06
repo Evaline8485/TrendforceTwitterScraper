@@ -435,7 +435,12 @@ async function scrapeOneAccount(page, handle) {
   // MAX_SCROLLS env var for a deeper one-off pass, e.g. onboarding a
   // brand-new account with no history yet)
   console.log(`${handle}: scraping recent tweets...`);
-  const maxScrolls = parseInt(process.env.MAX_SCROLLS, 10) || 15;
+  // Cut 15 -> 8 (2026-08-05): the account got suspended for crawling too
+  // fast. Cumulative daily request volume across every scraper hitting
+  // this one X account (accounts, watchlist, competitors, video-discovery,
+  // enrich_video_locations) is the real driver, not any single script's
+  // own pace - cutting scroll depth everywhere reduces total volume.
+  const maxScrolls = parseInt(process.env.MAX_SCROLLS, 10) || 8;
   const tweets = await scrapeTimeline(page, handle, maxScrolls);
 
   // Split into: brand-new tweets to enrich+append, and existing tweets
