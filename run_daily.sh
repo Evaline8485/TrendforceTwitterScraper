@@ -130,14 +130,14 @@ else
 fi
 npm run scrape:video-discovery || { echo "[WARN] scrape:video-discovery failed"; FAILURES+=("video discovery scrape"); }
 
-# Backfills account_locations.json (profile-location cache) for X Video
-# Ranking's region filter - bounded to MAX_LOOKUPS_PER_RUN new handles per
-# run (see enrich_video_locations.js) so a day with many newly discovered
-# accounts doesn't turn this into an hours-long step; the remainder just
-# gets picked up on a later run. Not a hard failure if it errors - the
-# region filter degrades to "unknown" for whatever wasn't looked up yet,
-# it doesn't block anything else.
-npm run enrich:video-locations || echo "[WARN] enrich:video-locations failed (non-fatal - region data just stays incomplete for now)"
+# DISABLED 2026-08-05/06 - the X account got suspended, and this step's
+# tight loop of profile-page visits was specifically implicated (an "X
+# suspends accounts" warning was seen live in the browser during this
+# exact step). It only backs the region filter's nice-to-have coverage,
+# nothing else depends on it - re-enable (uncomment the line below) once
+# the account has been stable for a while.
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Skipping enrich:video-locations (disabled - implicated in a recent account suspension)."
+# npm run enrich:video-locations || echo "[WARN] enrich:video-locations failed (non-fatal - region data just stays incomplete for now)"
 
 # Update and publish the dashboard to GitHub Pages
 # (publish.sh sends its own alert on CSV-validation/push/deploy failures)
