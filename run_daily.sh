@@ -130,14 +130,13 @@ else
 fi
 npm run scrape:video-discovery || { echo "[WARN] scrape:video-discovery failed"; FAILURES+=("video discovery scrape"); }
 
-# DISABLED 2026-08-05/06 - the X account got suspended, and this step's
-# tight loop of profile-page visits was specifically implicated (an "X
-# suspends accounts" warning was seen live in the browser during this
-# exact step). It only backs the region filter's nice-to-have coverage,
-# nothing else depends on it - re-enable (uncomment the line below) once
-# the account has been stable for a while.
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Skipping enrich:video-locations (disabled - implicated in a recent account suspension)."
-# npm run enrich:video-locations || echo "[WARN] enrich:video-locations failed (non-fatal - region data just stays incomplete for now)"
+# Scoped to just the dashboard's current top 30 (--top30) instead of the
+# whole ~2900-account pool - the full sweep (up to 100 profile visits/run,
+# no pause between them) was implicated in the account's 2026-08-05/06
+# suspension (an "X suspends accounts" warning was seen live in the
+# browser during that exact step). 30 lookups is a ~99% volume cut and
+# only enriches accounts actually shown on the dashboard right now.
+node enrich_video_locations.js --top30 || echo "[WARN] enrich:video-locations failed (non-fatal - region data just stays incomplete for now)"
 
 # Update and publish the dashboard to GitHub Pages
 # (publish.sh sends its own alert on CSV-validation/push/deploy failures)

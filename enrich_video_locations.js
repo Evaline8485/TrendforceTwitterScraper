@@ -29,6 +29,9 @@ const SESSION_FILE = path.join(__dirname, 'session.json');
 const LOCATION_CACHE_FILE = path.join(__dirname, 'account_locations.json');
 const VIDEO_DISCOVERY_CSV = path.join(__dirname, 'csv', 'video_discovery.csv');
 const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
+const VIDEO_RANKING_FILE = '/Users/elainekao/TrendForceDash/analysis/video_ranking.json';
+const TOP30_RANGE = '1d';
+const TOP30_COUNT = 30;
 // Cut back down 100 -> 20 (2026-08-05, one day after bumping 40 -> 100):
 // the account got suspended for crawling too fast, and 100 extra profile
 // page-loads per run on top of every other scraper hitting this same
@@ -76,6 +79,32 @@ function loadDiscoveryHandles() {
   return [...handles];
 }
 
+function loadTop30Handles() {
+  // Scopes enrichment down to just what's actually shown on the
+  // dashboard right now, instead of sweeping the whole ~2900-account
+  // pool - found 2026-08-05/07: that broad sweep (up to 100 profile
+  // visits/run with no pause between them) was implicated in the
+  // account getting suspended. 30 lookups is a ~99% volume cut, and it's
+  // the only part of the pool anyone's actually looking at.
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(VIDEO_RANKING_FILE, 'utf8'));
+  } catch {
+    return [];
+  }
+  const posts = (data[TOP30_RANGE] || []).slice();
+  posts.sort((a, b) => (b.views || 0) - (a.views || 0));
+  const handles = [];
+  const seen = new Set();
+  for (const p of posts) {
+    if (!p.handle || seen.has(p.handle)) continue;
+    seen.add(p.handle);
+    handles.push(p.handle);
+    if (handles.length >= TOP30_COUNT) break;
+  }
+  return handles;
+}
+
 async function getLocation(page, handle) {
   if (locationCache[handle] !== undefined) return locationCache[handle];
   try {
@@ -97,10 +126,16 @@ async function main() {
   // Optional `node enrich_video_locations.js @handle1 @handle2 ...` -
   // same pattern as scrape_accounts.js's own handle-list override - looks
   // up exactly those handles (re-checking even if already cached, so this
-  // doubles as a manual refresh) instead of scanning the whole pool. Used
-  // to prioritize a specific set (e.g. whatever's currently in the top 30
-  // shown on the dashboard) ahead of the general backlog.
-  const explicitHandles = process.argv.slice(2).filter((a) => a.startsWith('@')).map((a) => a.slice(1));
+  // doubles as a manual refresh) instead of scanning the whole pool.
+  //
+  // Optional `node enrich_video_locations.js --top30` - same idea, but
+  // the handle list comes from the dashboard's own current top 30
+  // (video_ranking.json) instead of being typed out by hand. This is the
+  // mode run_daily.sh actually uses now (see loadTop30Handles) - a full
+  // pool sweep is no longer wired into the daily schedule at all.
+  const explicitHandles = process.argv.includes('--top30')
+    ? loadTop30Handles()
+    : process.argv.slice(2).filter((a) => a.startsWith('@')).map((a) => a.slice(1));
 
   let toFetch;
   if (explicitHandles.length > 0) {
