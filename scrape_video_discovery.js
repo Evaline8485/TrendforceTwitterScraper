@@ -43,11 +43,12 @@ if (sinceArg) console.log(`Running with custom since date: ${sinceDate}`);
 // cadence without re-walking as deep into each query's results every
 // time. Override via --scrolls for a deeper one-off pass:
 // `node scrape_video_discovery.js --scrolls 20`.
-// Cut 10 -> 6 (2026-08-05) - the account got suspended for crawling too
-// fast. Cumulative daily request volume across every scraper hitting this
-// one X account is the real driver, not any single script's own pace.
+// Cut 10 -> 6 -> 4 (2026-08-05/07) - the account got suspended for
+// crawling too fast. Cumulative daily request volume across every
+// scraper hitting this one X account is the real driver, not any single
+// script's own pace.
 const scrollsArg = process.argv.includes('--scrolls') ? process.argv[process.argv.indexOf('--scrolls') + 1] : null;
-const MAX_SCROLLS_PER_QUERY = scrollsArg ? parseInt(scrollsArg, 10) : 6;
+const MAX_SCROLLS_PER_QUERY = scrollsArg ? parseInt(scrollsArg, 10) : 4;
 
 // Batched industry keywords (TrendForce's own coverage domain - semiconductor
 // / AI hardware news), each combined with filter:videos so results are
