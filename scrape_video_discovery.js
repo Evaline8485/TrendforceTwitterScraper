@@ -70,11 +70,11 @@ const SEARCH_QUERIES = KEYWORD_BATCHES.map((terms) => {
   return { query: `(${orPart}) filter:videos since:${sinceDate}`, topic: terms.join(' / ') };
 });
 
-// TrendForceDash is a sibling repo at a fixed local path - run_daily.sh
-// already reaches across to it by absolute path (calls its run_pipeline.sh
-// directly), so reading its analysis output the same way isn't a new kind
-// of cross-repo dependency, just the reverse direction of an existing one.
-const RISING_TOPICS_FILE = '/Users/elainekao/TrendForceDash/analysis/fuzzy_trends_1d.json';
+// TrendForceDash is a sibling repo - derived relative to this file rather
+// than a hardcoded absolute path, so this doesn't need editing on every
+// handoff to a new machine (see TrendForceDash/add_account.py's matching
+// comment).
+const RISING_TOPICS_FILE = path.join(__dirname, '..', 'TrendForceDash', 'analysis', 'fuzzy_trends_1d.json');
 // Cut 10 -> 5 (2026-07-24, alongside the scroll-depth reduction above) -
 // this script's 13 query batches (3 fixed + up to 10 Rising Topics) were
 // still the single biggest remaining cost in run_daily.sh's 6x/day

@@ -114,7 +114,9 @@ async function scrapeFollowers(page, handle) {
 // array, so they silently never got scraped despite showing as "tracked"
 // everywhere else. Same cross-repo absolute-path read already used by
 // scrape_video_discovery.js for TrendForceDash's fuzzy_trends_1d.json.
-const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
+// Derived relative to this file (sibling repo) rather than a hardcoded
+// absolute path - see TrendForceDash/add_account.py's matching comment.
+const ACCOUNTS_CONFIG_FILE = path.join(__dirname, '..', 'TrendForceDash', 'accounts_config.json');
 function loadAllAccounts() {
   const cfg = JSON.parse(fs.readFileSync(ACCOUNTS_CONFIG_FILE, 'utf8'));
   const x = cfg.X || {};

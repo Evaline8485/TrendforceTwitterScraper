@@ -28,8 +28,11 @@ const path = require('path');
 const SESSION_FILE = path.join(__dirname, 'session.json');
 const LOCATION_CACHE_FILE = path.join(__dirname, 'account_locations.json');
 const VIDEO_DISCOVERY_CSV = path.join(__dirname, 'csv', 'video_discovery.csv');
-const ACCOUNTS_CONFIG_FILE = '/Users/elainekao/TrendForceDash/accounts_config.json';
-const VIDEO_RANKING_FILE = '/Users/elainekao/TrendForceDash/analysis/video_ranking.json';
+// Derived relative to this file (sibling repo) rather than a hardcoded
+// absolute path, so this doesn't need editing on every handoff to a new
+// machine - see TrendForceDash/add_account.py's matching comment.
+const ACCOUNTS_CONFIG_FILE = path.join(__dirname, '..', 'TrendForceDash', 'accounts_config.json');
+const VIDEO_RANKING_FILE = path.join(__dirname, '..', 'TrendForceDash', 'analysis', 'video_ranking.json');
 const TOP30_RANGE = '1d';
 const TOP30_COUNT = 30;
 // Cut back down 100 -> 20 (2026-08-05, one day after bumping 40 -> 100):

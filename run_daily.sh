@@ -1,6 +1,6 @@
 #!/bin/bash
 export PATH="/usr/local/bin:/usr/bin:/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
-cd /Users/elainekao/TrendforceTwitterScraper
+cd "$(dirname "$0")"
 
 # launchd's StandardOutPath/StandardErrorPath (com.elainekao.trendforce-daily)
 # just append to cron.log forever with no rotation of its own - same gap
@@ -141,7 +141,7 @@ node enrich_video_locations.js --top30 || echo "[WARN] enrich:video-locations fa
 # Update and publish the dashboard to GitHub Pages
 # (publish.sh sends its own alert on CSV-validation/push/deploy failures)
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Running publish..."
-bash /Users/elainekao/TrendforceTwitterScraper/publish.sh || { echo "[ERROR] publish failed"; FAILURES+=("publish"); }
+bash publish.sh || { echo "[ERROR] publish failed"; FAILURES+=("publish"); }
 
 # TrendForceDash runs on its own independent schedule (0/4/6/8/12/16/18/20),
 # not this repo's :30-past-the-hour schedule - a fresh scrape here could sit
@@ -172,10 +172,16 @@ bash /Users/elainekao/TrendforceTwitterScraper/publish.sh || { echo "[ERROR] pub
 # stragglers alone - nothing to change here, just don't remove the
 # backgrounding above assuming it's self-sufficient without that plist key.
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Syncing TrendForceDash (backgrounded)..."
-nohup bash -c '
-  bash /Users/elainekao/TrendForceDash/run_pipeline.sh core
-  bash /Users/elainekao/TrendForceDash/run_pipeline.sh accounts
-' >> /Users/elainekao/TrendForceDash/pipeline.log 2>&1 &
+# Resolved relative to this script's own directory (sibling repo, same
+# convention as sync_data.sh's TWITTER_SRC/etc.) rather than a hardcoded
+# absolute path - captured into a variable BEFORE entering the
+# background subshell below, since that command string can't expand
+# "$(dirname "$0")" itself once it's running detached.
+DASH_DIR="$(cd "$(dirname "$0")/../TrendForceDash" && pwd)"
+nohup bash -c "
+  bash '$DASH_DIR/run_pipeline.sh' core
+  bash '$DASH_DIR/run_pipeline.sh' accounts
+" >> "$DASH_DIR/pipeline.log" 2>&1 &
 disown
 
 if [ ${#FAILURES[@]} -gt 0 ]; then
