@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH="/usr/local/bin:/usr/bin:/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
 cd "$(dirname "$0")"
 
 # launchd's StandardOutPath/StandardErrorPath (com.elainekao.trendforce-daily)
