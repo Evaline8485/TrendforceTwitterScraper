@@ -5,6 +5,7 @@
   "main": "scraper.js",
   "scripts": {
     "scrape": "node scraper.js",
+    "login": "node scraper.js --login-only",
     "scrape:watchlist": "node scrape_watchlist.js",
     "scrape:accounts": "node scrape_accounts.js",
     "rescrape:full": "node rescrape_full.js",

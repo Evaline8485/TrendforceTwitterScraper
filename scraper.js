@@ -374,6 +374,18 @@ async function main() {
       }
     }
 
+    // TrendForce/watchlist mention search is no longer needed (2026-08-12),
+    // but this is still the only script that knows how to log in/refresh
+    // session.json - every other script (scrape_accounts.js,
+    // scrape_video_discovery.js, ...) just reads that file and fails if
+    // it's stale. --login-only keeps that refresh alive on the daily
+    // schedule without running the mention-scraping/credit-analysis flow
+    // below it.
+    if (process.argv.includes('--login-only')) {
+      console.log('--login-only: session is valid/refreshed, skipping mention search.');
+      return;
+    }
+
     const safe = (s) => `"${String(s ?? '').replace(/"/g, '""').replace(/\n/g, ' ')}"`;
     const csvDir = path.join(__dirname, 'csv');
     fs.mkdirSync(csvDir, { recursive: true });

@@ -77,10 +77,12 @@ RUN_HOUR=$(date +%H)
 
 FAILURES=()
 
-# Clear mention scraper cache so it does a fresh scrape each day
-rm -f raw_tweets.json tf_reference.json
-
-npm run scrape || { echo "[WARN] scrape failed"; FAILURES+=("mention scrape"); }
+# TrendForce/watchlist mention search (npm run scrape) is no longer
+# needed (2026-08-12) - but scraper.js is still the only script that
+# knows how to log in/refresh session.json, which scrape:accounts and
+# everything below it depend on. --login-only keeps that refresh alive
+# without running the mention search itself.
+npm run login || { echo "[WARN] login/session refresh failed"; FAILURES+=("login"); }
 
 # Capture scrape:accounts output (while still streaming it to cron.log as
 # before) so we can verify @TrendForce was actually attempted — checking
