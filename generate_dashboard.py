@@ -28,7 +28,7 @@ with open(JSON_FILE, encoding='utf-8') as f:
     data = json.load(f)
 
 FOLLOWER_HISTORY_FILE = os.path.join(BASE, 'follower_history.json')
-FOLLOWER_CHART_START = '2026-07-02'  # align all accounts to the same start date on the chart
+FOLLOWER_CHART_START = '2026-08-13'  # reset point: chart shows this date onward, not full history
 follower_history = {}
 if os.path.exists(FOLLOWER_HISTORY_FILE):
     with open(FOLLOWER_HISTORY_FILE, encoding='utf-8') as f:
