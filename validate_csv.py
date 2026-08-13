@@ -56,9 +56,14 @@ def check_csv(handle):
             problems.append(f'{handle}.csv is empty (no header)')
             return problems
 
-        if len(header) != EXPECTED_COLUMNS:
+        # Same tolerance as the row check below: hasVideo was added as a new
+        # trailing column, and scrape_accounts.js only rewrites a file's
+        # header when it actually has something to write for that account —
+        # one short by exactly 1 just means it hasn't been touched since.
+        if len(header) != EXPECTED_COLUMNS and len(header) != EXPECTED_COLUMNS - 1:
             problems.append(
-                f'{handle}.csv header has {len(header)} columns, expected {EXPECTED_COLUMNS}'
+                f'{handle}.csv header has {len(header)} columns, expected {EXPECTED_COLUMNS} '
+                f'(or {EXPECTED_COLUMNS - 1} pre-hasVideo)'
             )
 
         malformed_lines = []
