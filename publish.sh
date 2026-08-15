@@ -92,7 +92,7 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Pushed. Watching GitHub Pages deployment...
 # querying too soon after a push can return a stale previous run and cause
 # a false "failure" — the earlier version of this script did that and kept
 # redeploying on top of runs that had actually already succeeded.
-REPO="elainekaotf/TrendforceTwitterScraper"
+REPO="Evaline8485/TrendforceTwitterScraper"
 
 wait_for_run_conclusion() {
   # $1 = commit SHA to match. Polls up to ~3 minutes. Echoes the conclusion
