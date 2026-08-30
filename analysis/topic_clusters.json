@@ -1,142 +1,169 @@
 {
   "clusters": [
     {
-      "id": 1,
-      "label": "ai / 台積電 / semianalysis / 輝達",
+      "id": 17,
+      "label": "ai / 億美元 / iphone / 蘋果",
       "top_terms": [
         "ai",
-        "台積電",
-        "semianalysis",
-        "輝達"
+        "億美元",
+        "iphone",
+        "蘋果"
       ],
-      "size": 3651,
+      "size": 3420,
       "accounts": {
-        "TrendForce": 145,
-        "dylan522p": 509,
-        "SemiAnalysis_": 675,
-        "jukan05": 340,
-        "QQ_Timmy": 401,
-        "technews_tw": 1581
+        "TrendForce": 160,
+        "dylan522p": 441,
+        "SemiAnalysis_": 611,
+        "jukan05": 346,
+        "QQ_Timmy": 427,
+        "technews_tw": 1435
       },
       "engagement_by_account": {
-        "TrendForce": 4349,
-        "dylan522p": 310451,
-        "SemiAnalysis_": 194921,
-        "jukan05": 242769,
-        "QQ_Timmy": 26588,
-        "technews_tw": 6369
-      }
-    },
-    {
-      "id": 8,
-      "label": "nvidia / amd / ai / gpu",
-      "top_terms": [
-        "nvidia",
-        "amd",
-        "ai",
-        "gpu"
-      ],
-      "size": 326,
-      "accounts": {
-        "TrendForce": 51,
-        "dylan522p": 40,
-        "SemiAnalysis_": 85,
-        "jukan05": 55,
-        "QQ_Timmy": 49,
-        "technews_tw": 46
-      },
-      "engagement_by_account": {
-        "TrendForce": 1520,
-        "dylan522p": 24814,
-        "SemiAnalysis_": 33502,
-        "jukan05": 52382,
-        "QQ_Timmy": 4854,
-        "technews_tw": 462
-      }
-    },
-    {
-      "id": 9,
-      "label": "samsung / nand / dram / spot",
-      "top_terms": [
-        "samsung",
-        "nand",
-        "dram",
-        "spot"
-      ],
-      "size": 318,
-      "accounts": {
-        "TrendForce": 134,
-        "dylan522p": 4,
-        "SemiAnalysis_": 11,
-        "jukan05": 94,
-        "QQ_Timmy": 33,
-        "technews_tw": 42
-      },
-      "engagement_by_account": {
-        "TrendForce": 5318,
-        "dylan522p": 1813,
-        "SemiAnalysis_": 1899,
-        "jukan05": 63097,
-        "QQ_Timmy": 2291,
-        "technews_tw": 228
-      }
-    },
-    {
-      "id": 16,
-      "label": "memory / trendforce / ai / prices",
-      "top_terms": [
-        "memory",
-        "trendforce",
-        "ai",
-        "prices"
-      ],
-      "size": 265,
-      "accounts": {
-        "TrendForce": 114,
-        "dylan522p": 5,
-        "SemiAnalysis_": 39,
-        "jukan05": 61,
-        "QQ_Timmy": 28,
-        "technews_tw": 18
-      },
-      "engagement_by_account": {
-        "TrendForce": 3781,
-        "dylan522p": 2221,
-        "SemiAnalysis_": 7581,
-        "jukan05": 49763,
-        "QQ_Timmy": 1613,
-        "technews_tw": 120
+        "TrendForce": 4889,
+        "dylan522p": 251474,
+        "SemiAnalysis_": 172472,
+        "jukan05": 239787,
+        "QQ_Timmy": 29027,
+        "technews_tw": 5855
       }
     },
     {
       "id": 2,
-      "label": "chip / supply / chain / ai",
+      "label": "nvidia / ai / gpu / rubin",
       "top_terms": [
-        "chip",
-        "supply",
-        "chain",
-        "ai"
+        "nvidia",
+        "ai",
+        "gpu",
+        "rubin"
       ],
-      "size": 244,
+      "size": 293,
       "accounts": {
-        "TrendForce": 79,
-        "dylan522p": 14,
-        "SemiAnalysis_": 87,
-        "jukan05": 53,
-        "QQ_Timmy": 8,
-        "technews_tw": 3
+        "TrendForce": 51,
+        "dylan522p": 31,
+        "SemiAnalysis_": 67,
+        "jukan05": 58,
+        "QQ_Timmy": 44,
+        "technews_tw": 42
       },
       "engagement_by_account": {
-        "TrendForce": 1671,
-        "dylan522p": 6544,
-        "SemiAnalysis_": 23606,
-        "jukan05": 32334,
-        "QQ_Timmy": 805,
-        "technews_tw": 37
+        "TrendForce": 1231,
+        "dylan522p": 17649,
+        "SemiAnalysis_": 26223,
+        "jukan05": 42723,
+        "QQ_Timmy": 4728,
+        "technews_tw": 434
       }
     },
     {
-      "id": 10,
+      "id": 9,
+      "label": "trendforce / dram / nand / spot",
+      "top_terms": [
+        "trendforce",
+        "dram",
+        "nand",
+        "spot"
+      ],
+      "size": 293,
+      "accounts": {
+        "TrendForce": 146,
+        "dylan522p": 3,
+        "SemiAnalysis_": 4,
+        "jukan05": 41,
+        "QQ_Timmy": 44,
+        "technews_tw": 55
+      },
+      "engagement_by_account": {
+        "TrendForce": 5390,
+        "dylan522p": 687,
+        "SemiAnalysis_": 499,
+        "jukan05": 32164,
+        "QQ_Timmy": 3009,
+        "technews_tw": 349
+      }
+    },
+    {
+      "id": 14,
+      "label": "memory / semianalysis / ai / chipbook",
+      "top_terms": [
+        "memory",
+        "semianalysis",
+        "ai",
+        "chipbook"
+      ],
+      "size": 280,
+      "accounts": {
+        "TrendForce": 57,
+        "dylan522p": 44,
+        "SemiAnalysis_": 101,
+        "jukan05": 59,
+        "QQ_Timmy": 11,
+        "technews_tw": 8
+      },
+      "engagement_by_account": {
+        "TrendForce": 1926,
+        "dylan522p": 23326,
+        "SemiAnalysis_": 20001,
+        "jukan05": 49088,
+        "QQ_Timmy": 877,
+        "technews_tw": 70
+      }
+    },
+    {
+      "id": 1,
+      "label": "tsmc / intel / packaging / foundry",
+      "top_terms": [
+        "tsmc",
+        "intel",
+        "packaging",
+        "foundry"
+      ],
+      "size": 239,
+      "accounts": {
+        "TrendForce": 83,
+        "dylan522p": 23,
+        "SemiAnalysis_": 32,
+        "jukan05": 59,
+        "QQ_Timmy": 29,
+        "technews_tw": 13
+      },
+      "engagement_by_account": {
+        "TrendForce": 2887,
+        "dylan522p": 23887,
+        "SemiAnalysis_": 7914,
+        "jukan05": 33552,
+        "QQ_Timmy": 2628,
+        "technews_tw": 131
+      }
+    },
+    {
+      "id": 7,
+      "label": "openai / anthropic / google / ai",
+      "top_terms": [
+        "openai",
+        "anthropic",
+        "google",
+        "ai"
+      ],
+      "size": 206,
+      "accounts": {
+        "TrendForce": 2,
+        "dylan522p": 32,
+        "SemiAnalysis_": 20,
+        "jukan05": 13,
+        "QQ_Timmy": 12,
+        "technews_tw": 127
+      },
+      "engagement_by_account": {
+        "TrendForce": 83,
+        "dylan522p": 33535,
+        "SemiAnalysis_": 10252,
+        "jukan05": 10520,
+        "QQ_Timmy": 606,
+        "technews_tw": 299
+      }
+    },
+    {
+      "id": 4,
       "label": "hbm / dram / memory / samsung",
       "top_terms": [
         "hbm",
@@ -144,174 +171,222 @@
         "memory",
         "samsung"
       ],
-      "size": 157,
+      "size": 164,
       "accounts": {
-        "TrendForce": 48,
-        "dylan522p": 2,
-        "SemiAnalysis_": 29,
-        "jukan05": 24,
-        "QQ_Timmy": 23,
-        "technews_tw": 31
+        "TrendForce": 50,
+        "dylan522p": 1,
+        "SemiAnalysis_": 28,
+        "jukan05": 26,
+        "QQ_Timmy": 27,
+        "technews_tw": 32
       },
       "engagement_by_account": {
-        "TrendForce": 1903,
-        "dylan522p": 487,
-        "SemiAnalysis_": 11387,
-        "jukan05": 14678,
-        "QQ_Timmy": 2003,
-        "technews_tw": 143
+        "TrendForce": 2047,
+        "dylan522p": 172,
+        "SemiAnalysis_": 10410,
+        "jukan05": 15793,
+        "QQ_Timmy": 2389,
+        "technews_tw": 145
       }
     },
     {
       "id": 13,
-      "label": "億美元 / openai / ai / anthropic",
+      "label": "samsung / foundry / electronics / skhynix",
       "top_terms": [
-        "億美元",
-        "openai",
+        "samsung",
+        "foundry",
+        "electronics",
+        "skhynix"
+      ],
+      "size": 164,
+      "accounts": {
+        "TrendForce": 72,
+        "dylan522p": 3,
+        "SemiAnalysis_": 6,
+        "jukan05": 75,
+        "QQ_Timmy": 7,
+        "technews_tw": 1
+      },
+      "engagement_by_account": {
+        "TrendForce": 2010,
+        "dylan522p": 2834,
+        "SemiAnalysis_": 801,
+        "jukan05": 54231,
+        "QQ_Timmy": 452,
+        "technews_tw": 2
+      }
+    },
+    {
+      "id": 6,
+      "label": "ai / 億美元 / 最新研究指出 / ic",
+      "top_terms": [
         "ai",
-        "anthropic"
+        "億美元",
+        "最新研究指出",
+        "ic"
       ],
       "size": 156,
       "accounts": {
-        "dylan522p": 11,
-        "SemiAnalysis_": 6,
-        "jukan05": 5,
-        "QQ_Timmy": 35,
-        "technews_tw": 99
+        "QQ_Timmy": 6,
+        "technews_tw": 150
       },
       "engagement_by_account": {
-        "dylan522p": 11652,
-        "SemiAnalysis_": 1852,
-        "jukan05": 3907,
-        "QQ_Timmy": 2200,
-        "technews_tw": 316
+        "QQ_Timmy": 575,
+        "technews_tw": 599
       }
     },
     {
-      "id": 15,
-      "label": "ai / 最新研究指出 / 輝達 / ic",
+      "id": 12,
+      "label": "chip / asml / china / euv",
       "top_terms": [
-        "ai",
-        "最新研究指出",
-        "輝達",
-        "ic"
-      ],
-      "size": 154,
-      "accounts": {
-        "QQ_Timmy": 5,
-        "technews_tw": 149
-      },
-      "engagement_by_account": {
-        "QQ_Timmy": 493,
-        "technews_tw": 609
-      }
-    },
-    {
-      "id": 17,
-      "label": "intel / tsmc / foundry / cpu",
-      "top_terms": [
-        "intel",
-        "tsmc",
-        "foundry",
-        "cpu"
+        "chip",
+        "asml",
+        "china",
+        "euv"
       ],
       "size": 138,
       "accounts": {
-        "TrendForce": 47,
-        "dylan522p": 15,
-        "SemiAnalysis_": 12,
+        "TrendForce": 41,
+        "dylan522p": 5,
+        "SemiAnalysis_": 30,
         "jukan05": 34,
-        "QQ_Timmy": 21,
-        "technews_tw": 9
+        "QQ_Timmy": 13,
+        "technews_tw": 15
       },
       "engagement_by_account": {
-        "TrendForce": 1749,
-        "dylan522p": 15264,
-        "SemiAnalysis_": 4048,
-        "jukan05": 18223,
-        "QQ_Timmy": 1796,
-        "technews_tw": 102
+        "TrendForce": 729,
+        "dylan522p": 2114,
+        "SemiAnalysis_": 16389,
+        "jukan05": 20181,
+        "QQ_Timmy": 788,
+        "technews_tw": 63
       }
     },
     {
-      "id": 14,
-      "label": "hynix / sk / samsung / hbm",
+      "id": 3,
+      "label": "amd / nvidia / cpu / ai",
+      "top_terms": [
+        "amd",
+        "nvidia",
+        "cpu",
+        "ai"
+      ],
+      "size": 117,
+      "accounts": {
+        "TrendForce": 10,
+        "dylan522p": 16,
+        "SemiAnalysis_": 38,
+        "jukan05": 6,
+        "QQ_Timmy": 19,
+        "technews_tw": 28
+      },
+      "engagement_by_account": {
+        "TrendForce": 697,
+        "dylan522p": 12935,
+        "SemiAnalysis_": 13004,
+        "jukan05": 3002,
+        "QQ_Timmy": 1200,
+        "technews_tw": 208
+      }
+    },
+    {
+      "id": 5,
+      "label": "hynix / sk / samsung / memory",
       "top_terms": [
         "hynix",
         "sk",
         "samsung",
-        "hbm"
+        "memory"
       ],
-      "size": 113,
+      "size": 109,
       "accounts": {
-        "TrendForce": 16,
-        "dylan522p": 3,
-        "SemiAnalysis_": 8,
-        "jukan05": 67,
-        "QQ_Timmy": 9,
-        "technews_tw": 10
+        "TrendForce": 15,
+        "dylan522p": 2,
+        "SemiAnalysis_": 7,
+        "jukan05": 66,
+        "QQ_Timmy": 7,
+        "technews_tw": 12
       },
       "engagement_by_account": {
-        "TrendForce": 1304,
-        "dylan522p": 1579,
-        "SemiAnalysis_": 3039,
-        "jukan05": 63727,
-        "QQ_Timmy": 611,
-        "technews_tw": 51
-      }
-    },
-    {
-      "id": 7,
-      "label": "image / bruh / nvda / buy",
-      "top_terms": [
-        "image",
-        "bruh",
-        "nvda",
-        "buy"
-      ],
-      "size": 92,
-      "accounts": {
-        "dylan522p": 11,
-        "SemiAnalysis_": 13,
-        "jukan05": 37,
-        "QQ_Timmy": 31
-      },
-      "engagement_by_account": {
-        "dylan522p": 4862,
-        "SemiAnalysis_": 22832,
-        "jukan05": 24357,
-        "QQ_Timmy": 1394
+        "TrendForce": 1204,
+        "dylan522p": 1320,
+        "SemiAnalysis_": 3004,
+        "jukan05": 63484,
+        "QQ_Timmy": 415,
+        "technews_tw": 54
       }
     },
     {
       "id": 0,
-      "label": "google / tpu / ai / gemini",
+      "label": "deepseek / 外電綜合整理 / 早安 / kimi",
       "top_terms": [
-        "google",
-        "tpu",
-        "ai",
-        "gemini"
+        "deepseek",
+        "外電綜合整理",
+        "早安",
+        "kimi"
       ],
-      "size": 90,
+      "size": 98,
       "accounts": {
         "TrendForce": 3,
-        "dylan522p": 5,
-        "SemiAnalysis_": 6,
-        "jukan05": 4,
-        "QQ_Timmy": 16,
-        "technews_tw": 56
+        "dylan522p": 14,
+        "SemiAnalysis_": 24,
+        "jukan05": 8,
+        "QQ_Timmy": 33,
+        "technews_tw": 16
       },
       "engagement_by_account": {
-        "TrendForce": 101,
-        "dylan522p": 3307,
-        "SemiAnalysis_": 2840,
-        "jukan05": 2775,
-        "QQ_Timmy": 980,
-        "technews_tw": 188
+        "TrendForce": 40,
+        "dylan522p": 11701,
+        "SemiAnalysis_": 10057,
+        "jukan05": 5644,
+        "QQ_Timmy": 2440,
+        "technews_tw": 39
       }
     },
     {
-      "id": 4,
+      "id": 15,
+      "label": "台積電 / 魏哲家 / cowos / 英特爾",
+      "top_terms": [
+        "台積電",
+        "魏哲家",
+        "cowos",
+        "英特爾"
+      ],
+      "size": 97,
+      "accounts": {
+        "QQ_Timmy": 5,
+        "technews_tw": 92
+      },
+      "engagement_by_account": {
+        "QQ_Timmy": 355,
+        "technews_tw": 625
+      }
+    },
+    {
+      "id": 8,
+      "label": "image / bruh / nvda / 億美元",
+      "top_terms": [
+        "image",
+        "bruh",
+        "nvda",
+        "億美元"
+      ],
+      "size": 87,
+      "accounts": {
+        "dylan522p": 10,
+        "SemiAnalysis_": 12,
+        "jukan05": 32,
+        "QQ_Timmy": 33
+      },
+      "engagement_by_account": {
+        "dylan522p": 4632,
+        "SemiAnalysis_": 22768,
+        "jukan05": 22371,
+        "QQ_Timmy": 1407
+      }
+    },
+    {
+      "id": 10,
       "label": "spacex / ipo / 馬斯克 / 億美元",
       "top_terms": [
         "spacex",
@@ -319,143 +394,60 @@
         "馬斯克",
         "億美元"
       ],
-      "size": 76,
+      "size": 74,
       "accounts": {
         "TrendForce": 1,
-        "QQ_Timmy": 4,
-        "technews_tw": 71
+        "QQ_Timmy": 5,
+        "technews_tw": 68
       },
       "engagement_by_account": {
         "TrendForce": 14,
-        "QQ_Timmy": 272,
-        "technews_tw": 188
+        "QQ_Timmy": 304,
+        "technews_tw": 182
       }
     },
     {
-      "id": 5,
-      "label": "apple / iphone / tsmc / foldable",
+      "id": 16,
+      "label": "輝達 / 黃仁勳 / ai / ai晶片",
       "top_terms": [
-        "apple",
-        "iphone",
-        "tsmc",
-        "foldable"
-      ],
-      "size": 75,
-      "accounts": {
-        "TrendForce": 29,
-        "dylan522p": 6,
-        "SemiAnalysis_": 6,
-        "jukan05": 16,
-        "QQ_Timmy": 8,
-        "technews_tw": 10
-      },
-      "engagement_by_account": {
-        "TrendForce": 421,
-        "dylan522p": 2504,
-        "SemiAnalysis_": 4963,
-        "jukan05": 12563,
-        "QQ_Timmy": 455,
-        "technews_tw": 40
-      }
-    },
-    {
-      "id": 3,
-      "label": "mlcc / mlc / ai / trendforce",
-      "top_terms": [
-        "mlcc",
-        "mlc",
+        "輝達",
+        "黃仁勳",
         "ai",
-        "trendforce"
+        "ai晶片"
       ],
-      "size": 61,
+      "size": 67,
       "accounts": {
-        "TrendForce": 10,
-        "SemiAnalysis_": 1,
-        "jukan05": 17,
-        "QQ_Timmy": 19,
-        "technews_tw": 14
+        "technews_tw": 67
       },
       "engagement_by_account": {
-        "TrendForce": 240,
-        "SemiAnalysis_": 1042,
-        "jukan05": 5589,
-        "QQ_Timmy": 1950,
-        "technews_tw": 292
+        "technews_tw": 225
       }
     },
     {
       "id": 11,
-      "label": "iphone / 蘋果 / pro / 智慧手機",
+      "label": "ai資料中心 / ai / hvdc / 台達電",
       "top_terms": [
-        "iphone",
-        "蘋果",
-        "pro",
-        "智慧手機"
+        "ai資料中心",
+        "ai",
+        "hvdc",
+        "台達電"
       ],
-      "size": 45,
+      "size": 26,
       "accounts": {
-        "TrendForce": 3,
-        "QQ_Timmy": 3,
-        "technews_tw": 39
+        "technews_tw": 26
       },
       "engagement_by_account": {
-        "TrendForce": 38,
-        "QQ_Timmy": 382,
-        "technews_tw": 165
-      }
-    },
-    {
-      "id": 6,
-      "label": "glass / ptfe / substrates / fiber",
-      "top_terms": [
-        "glass",
-        "ptfe",
-        "substrates",
-        "fiber"
-      ],
-      "size": 38,
-      "accounts": {
-        "TrendForce": 8,
-        "SemiAnalysis_": 1,
-        "jukan05": 15,
-        "QQ_Timmy": 13,
-        "technews_tw": 1
-      },
-      "engagement_by_account": {
-        "TrendForce": 600,
-        "SemiAnalysis_": 67,
-        "jukan05": 4991,
-        "QQ_Timmy": 1398,
-        "technews_tw": 46
-      }
-    },
-    {
-      "id": 12,
-      "label": "預計 / 億元 / 日宣布 / 鴻海",
-      "top_terms": [
-        "預計",
-        "億元",
-        "日宣布",
-        "鴻海"
-      ],
-      "size": 19,
-      "accounts": {
-        "QQ_Timmy": 11,
-        "technews_tw": 8
-      },
-      "engagement_by_account": {
-        "QQ_Timmy": 796,
-        "technews_tw": 24
+        "technews_tw": 100
       }
     }
   ],
   "gaps": [
     {
-      "cluster_id": 1,
-      "label": "ai / 台積電 / semianalysis / 輝達",
-      "own_count": 145,
-      "competitor_count": 3506,
-      "competitor_engagement": 781098,
+      "cluster_id": 17,
+      "label": "ai / 億美元 / iphone / 蘋果",
+      "own_count": 160,
+      "competitor_count": 3260,
+      "competitor_engagement": 698615,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -465,11 +457,11 @@
       ]
     },
     {
-      "cluster_id": 8,
-      "label": "nvidia / amd / ai / gpu",
+      "cluster_id": 2,
+      "label": "nvidia / ai / gpu / rubin",
       "own_count": 51,
-      "competitor_count": 275,
-      "competitor_engagement": 116014,
+      "competitor_count": 242,
+      "competitor_engagement": 91757,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -479,11 +471,11 @@
       ]
     },
     {
-      "cluster_id": 14,
-      "label": "hynix / sk / samsung / hbm",
-      "own_count": 16,
-      "competitor_count": 97,
-      "competitor_engagement": 69007,
+      "cluster_id": 5,
+      "label": "hynix / sk / samsung / memory",
+      "own_count": 15,
+      "competitor_count": 94,
+      "competitor_engagement": 68277,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -494,10 +486,24 @@
     },
     {
       "cluster_id": 7,
-      "label": "image / bruh / nvda / buy",
+      "label": "openai / anthropic / google / ai",
+      "own_count": 2,
+      "competitor_count": 204,
+      "competitor_engagement": 55212,
+      "competitors_covering": [
+        "dylan522p",
+        "SemiAnalysis_",
+        "jukan05",
+        "QQ_Timmy",
+        "technews_tw"
+      ]
+    },
+    {
+      "cluster_id": 8,
+      "label": "image / bruh / nvda / 億美元",
       "own_count": 0,
-      "competitor_count": 92,
-      "competitor_engagement": 53445,
+      "competitor_count": 87,
+      "competitor_engagement": 51178,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -506,11 +512,11 @@
       ]
     },
     {
-      "cluster_id": 13,
-      "label": "億美元 / openai / ai / anthropic",
-      "own_count": 0,
-      "competitor_count": 156,
-      "competitor_engagement": 19927,
+      "cluster_id": 3,
+      "label": "amd / nvidia / cpu / ai",
+      "own_count": 10,
+      "competitor_count": 107,
+      "competitor_engagement": 30349,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -521,10 +527,10 @@
     },
     {
       "cluster_id": 0,
-      "label": "google / tpu / ai / gemini",
+      "label": "deepseek / 外電綜合整理 / 早安 / kimi",
       "own_count": 3,
-      "competitor_count": 87,
-      "competitor_engagement": 10090,
+      "competitor_count": 95,
+      "competitor_engagement": 29881,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -534,70 +540,66 @@
       ]
     },
     {
-      "cluster_id": 3,
-      "label": "mlcc / mlc / ai / trendforce",
-      "own_count": 10,
-      "competitor_count": 51,
-      "competitor_engagement": 8873,
+      "cluster_id": 6,
+      "label": "ai / 億美元 / 最新研究指出 / ic",
+      "own_count": 0,
+      "competitor_count": 156,
+      "competitor_engagement": 1174,
       "competitors_covering": [
-        "SemiAnalysis_",
-        "jukan05",
         "QQ_Timmy",
         "technews_tw"
       ]
     },
     {
       "cluster_id": 15,
-      "label": "ai / 最新研究指出 / 輝達 / ic",
+      "label": "台積電 / 魏哲家 / cowos / 英特爾",
       "own_count": 0,
-      "competitor_count": 154,
-      "competitor_engagement": 1102,
+      "competitor_count": 97,
+      "competitor_engagement": 980,
       "competitors_covering": [
         "QQ_Timmy",
         "technews_tw"
       ]
     },
     {
-      "cluster_id": 12,
-      "label": "預計 / 億元 / 日宣布 / 鴻海",
-      "own_count": 0,
-      "competitor_count": 19,
-      "competitor_engagement": 820,
+      "cluster_id": 10,
+      "label": "spacex / ipo / 馬斯克 / 億美元",
+      "own_count": 1,
+      "competitor_count": 73,
+      "competitor_engagement": 486,
       "competitors_covering": [
         "QQ_Timmy",
+        "technews_tw"
+      ]
+    },
+    {
+      "cluster_id": 16,
+      "label": "輝達 / 黃仁勳 / ai / ai晶片",
+      "own_count": 0,
+      "competitor_count": 67,
+      "competitor_engagement": 225,
+      "competitors_covering": [
         "technews_tw"
       ]
     },
     {
       "cluster_id": 11,
-      "label": "iphone / 蘋果 / pro / 智慧手機",
-      "own_count": 3,
-      "competitor_count": 42,
-      "competitor_engagement": 547,
+      "label": "ai資料中心 / ai / hvdc / 台達電",
+      "own_count": 0,
+      "competitor_count": 26,
+      "competitor_engagement": 100,
       "competitors_covering": [
-        "QQ_Timmy",
-        "technews_tw"
-      ]
-    },
-    {
-      "cluster_id": 4,
-      "label": "spacex / ipo / 馬斯克 / 億美元",
-      "own_count": 1,
-      "competitor_count": 75,
-      "competitor_engagement": 460,
-      "competitors_covering": [
-        "QQ_Timmy",
         "technews_tw"
       ]
     }
   ],
   "suggested_entry_points": [
     {
-      "cluster_id": 1,
-      "label": "ai / 台積電 / semianalysis / 輝達",
-      "own_count": 145,
-      "competitor_count": 3506,
-      "competitor_engagement": 781098,
+      "cluster_id": 17,
+      "label": "ai / 億美元 / iphone / 蘋果",
+      "own_count": 160,
+      "competitor_count": 3260,
+      "competitor_engagement": 698615,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -607,11 +609,11 @@
       ]
     },
     {
-      "cluster_id": 8,
-      "label": "nvidia / amd / ai / gpu",
+      "cluster_id": 2,
+      "label": "nvidia / ai / gpu / rubin",
       "own_count": 51,
-      "competitor_count": 275,
-      "competitor_engagement": 116014,
+      "competitor_count": 242,
+      "competitor_engagement": 91757,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -621,11 +623,11 @@
       ]
     },
     {
-      "cluster_id": 14,
-      "label": "hynix / sk / samsung / hbm",
-      "own_count": 16,
-      "competitor_count": 97,
-      "competitor_engagement": 69007,
+      "cluster_id": 5,
+      "label": "hynix / sk / samsung / memory",
+      "own_count": 15,
+      "competitor_count": 94,
+      "competitor_engagement": 68277,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
@@ -636,29 +638,29 @@
     },
     {
       "cluster_id": 7,
-      "label": "image / bruh / nvda / buy",
-      "own_count": 0,
-      "competitor_count": 92,
-      "competitor_engagement": 53445,
-      "competitors_covering": [
-        "dylan522p",
-        "SemiAnalysis_",
-        "jukan05",
-        "QQ_Timmy"
-      ]
-    },
-    {
-      "cluster_id": 13,
-      "label": "億美元 / openai / ai / anthropic",
-      "own_count": 0,
-      "competitor_count": 156,
-      "competitor_engagement": 19927,
+      "label": "openai / anthropic / google / ai",
+      "own_count": 2,
+      "competitor_count": 204,
+      "competitor_engagement": 55212,
       "competitors_covering": [
         "dylan522p",
         "SemiAnalysis_",
         "jukan05",
         "QQ_Timmy",
         "technews_tw"
+      ]
+    },
+    {
+      "cluster_id": 8,
+      "label": "image / bruh / nvda / 億美元",
+      "own_count": 0,
+      "competitor_count": 87,
+      "competitor_engagement": 51178,
+      "competitors_covering": [
+        "dylan522p",
+        "SemiAnalysis_",
+        "jukan05",
+        "QQ_Timmy"
       ]
     }
   ]
