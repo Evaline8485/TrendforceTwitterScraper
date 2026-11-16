@@ -175,10 +175,30 @@ const unquote = (s) => (s || '').replace(/^"|"$/g, '').replace(/""/g, '"');
 
 const UPDATE_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
 
+// Optional backfill window: X_SEARCH_SINCE / X_SEARCH_UNTIL (YYYY-MM-DD,
+// until exclusive) scrape X's Latest search for from:<handle> in that range
+// instead of the profile timeline. Needed because X stops loading a profile
+// timeline after roughly 100 tweets - for a high-volume account like @FT
+// that's barely two days, so a longer outage (2026-11-06..15, the login
+// loop) can't be recovered from the timeline at all. Unset = timeline, as
+// on every scheduled run.
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const SEARCH_SINCE = DATE_RE.test(process.env.X_SEARCH_SINCE || '') ? process.env.X_SEARCH_SINCE : null;
+const SEARCH_UNTIL = DATE_RE.test(process.env.X_SEARCH_UNTIL || '') ? process.env.X_SEARCH_UNTIL : null;
+if ((process.env.X_SEARCH_SINCE || process.env.X_SEARCH_UNTIL) && !(SEARCH_SINCE && SEARCH_UNTIL)) {
+  console.error('X_SEARCH_SINCE and X_SEARCH_UNTIL must both be YYYY-MM-DD - ignoring them, scraping timelines.');
+}
+
 async function scrapeTimeline(page, handle, maxScrolls = 15) {
   const cleanHandle = handle.replace('@', '');
-  console.log(`\nScraping timeline for ${handle}...`);
-  await page.goto(`https://x.com/${cleanHandle}`, { waitUntil: 'domcontentloaded' });
+  if (SEARCH_SINCE && SEARCH_UNTIL) {
+    const query = `from:${cleanHandle} since:${SEARCH_SINCE} until:${SEARCH_UNTIL}`;
+    console.log(`\nScraping search "${query}" for ${handle}...`);
+    await page.goto(`https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query&f=live`, { waitUntil: 'domcontentloaded' });
+  } else {
+    console.log(`\nScraping timeline for ${handle}...`);
+    await page.goto(`https://x.com/${cleanHandle}`, { waitUntil: 'domcontentloaded' });
+  }
   await page.waitForTimeout(5000);
 
   // Retry up to 3 times if Twitter shows "Something went wrong"

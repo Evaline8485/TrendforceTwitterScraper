@@ -373,8 +373,11 @@ async function main() {
       await saveSession(context);
     } else {
       await page.goto('https://x.com/home', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(2000);
-      const isLoggedIn = await page.$('[data-testid="SideNav_AccountSwitcher_Button"]');
+      // Wait for the nav to actually render (up to 15s, like every other X
+      // script here) rather than a fixed 2s: X often takes longer than that
+      // to draw it, and each miss sent a perfectly valid session through
+      // the login page ("MANUAL LOGIN REQUIRED") - seen 2026-11-16.
+      const isLoggedIn = await page.waitForSelector('[data-testid="SideNav_AccountSwitcher_Button"]', { timeout: 15000 }).catch(() => null);
       if (!isLoggedIn) {
         console.log('Session expired, logging in again...');
         await login(page);
