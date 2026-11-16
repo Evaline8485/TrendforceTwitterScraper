@@ -212,6 +212,8 @@ async function scrapeTimeline(page, handle, maxScrolls = 15) {
 
   const seen = new Set();
   const tweets = [];
+  let stoppedEarly = false;
+  let lastAdded = 0;
 
   for (let scroll = 0; scroll < maxScrolls; scroll++) {
     // Handle mid-scroll "Something went wrong" errors
@@ -291,7 +293,8 @@ async function scrapeTimeline(page, handle, maxScrolls = 15) {
     }
 
     console.log(`  Scroll ${scroll + 1}/${maxScrolls} — +${addedCount} new (total: ${tweets.length})`);
-    if (addedCount === 0 && scroll > 15) { console.log('  No new tweets after 15 empty scrolls, stopping early.'); break; }
+    lastAdded = addedCount;
+    if (addedCount === 0 && scroll > 15) { console.log('  No new tweets after 15 empty scrolls, stopping early.'); stoppedEarly = true; break; }
 
     // Scroll to the last tweet element rather than a fixed pixel amount
     // This is more reliable with Twitter's virtualized rendering
@@ -304,6 +307,12 @@ async function scrapeTimeline(page, handle, maxScrolls = 15) {
       }
     });
     await page.waitForTimeout(4000);
+  }
+  // A backfill window must be exhausted to be complete; the scheduled
+  // timeline runs stop at their scroll budget by design, so only warn for
+  // search windows.
+  if (SEARCH_SINCE && SEARCH_UNTIL && !stoppedEarly && lastAdded > 0) {
+    console.log(`  [WARN] Hit MAX_SCROLLS (${maxScrolls}) while the search was still returning new tweets - this window is probably incomplete; rerun it with a higher MAX_SCROLLS.`);
   }
 
   // Convert from X's raw UTC timestamp to Taiwan time so everything
@@ -533,10 +542,16 @@ async function scrapeOneAccount(page, handle) {
 
   const header = 'timestamp,views,likes,retweets,replies,hasImages,keywords,tweetUrl,text,translated_text,hasVideo\n';
   const survivingLines = existingLines.filter((_, i) => !droppedIdx.has(i));
-  // Prepend new rows (newest first) then existing rows (refreshed in place)
-  const combined = header
-    + (newRows ? newRows + '\n' : '')
-    + survivingLines.join('\n') + (survivingLines.length ? '\n' : '');
+  // Newest first by timestamp (first column), not by insertion: a backfill
+  // (a deep timeline scroll or an X_SEARCH window) finds tweets OLDER than
+  // rows already stored, and simply prepending new rows - as this used to -
+  // broke the file's newest-first order. The sort is stable, so rows with
+  // the same timestamp keep their order.
+  const rowTime = (line) => Date.parse(line.slice(0, line.indexOf(','))) || 0;
+  const rows = [...(newRows ? newRows.split('\n') : []), ...survivingLines]
+    .filter((line) => line.trim())
+    .sort((a, b) => rowTime(b) - rowTime(a));
+  const combined = header + rows.join('\n') + (rows.length ? '\n' : '');
   fs.writeFileSync(csvFile, combined);
   console.log(`Updated csv/${cleanHandle}.csv (+${newTweets.length} new, ${updatedCount} refreshed, ${droppedIdx.size} duplicates removed, ${existingByUrl.size + newTweets.length} total)`);
 }
