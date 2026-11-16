@@ -296,13 +296,13 @@ async function scrapeTimeline(page, handle, maxScrolls = 15) {
 
 async function main() {
   const contextOptions = {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 900 },
   };
   if (fs.existsSync(SESSION_FILE)) contextOptions.storageState = SESSION_FILE;
 
   let browser = await chromium.launch({
     headless: false,
+    channel: 'chrome', // real Google Chrome - see scraper.js main() for why
     args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'],
   });
   let context = await browser.newContext(contextOptions);
@@ -319,6 +319,7 @@ async function main() {
     try { await browser.close(); } catch {}
     browser = await chromium.launch({
       headless: false,
+      channel: 'chrome', // real Google Chrome - see scraper.js main() for why
       args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'],
     });
     context = await browser.newContext(contextOptions);

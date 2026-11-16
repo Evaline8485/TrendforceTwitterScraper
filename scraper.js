@@ -340,13 +340,23 @@ async function scrapeTFReference(page) {
 async function main() {
   const hasSession = fs.existsSync(SESSION_FILE);
 
+  // channel: 'chrome' launches the real Google Chrome install instead of
+  // Playwright's bundled "Chrome for Testing", and there is deliberately no
+  // userAgent override any more (Chrome sends its own, current one). Found
+  // 2026-11-16: from the 2026-11-06 00:30 run on, X treated the bundled
+  // browser + the old hard-coded Chrome/124 userAgent as logged out even
+  // though session.json was still valid (the very same file logs straight
+  // in under real Chrome), so every run fell into MANUAL LOGIN - and X's new
+  // login page (/i/jf/onboarding/web) then failed with 發生錯誤 in that
+  // browser, so logging in by hand just looped too. Every other X script in
+  // this repo launches the same way for the same reason.
   const browser = await chromium.launch({
     headless: false,
+    channel: 'chrome',
     args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'],
   });
 
   const contextOptions = {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 900 },
   };
   if (hasSession) {
@@ -581,9 +591,8 @@ async function main() {
 if (process.argv[2] === '--debug-followers') {
   const handle = process.argv[3] || '@trendforce';
   (async () => {
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: false, channel: 'chrome' });
     const contextOptions = {
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
       viewport: { width: 1280, height: 900 },
     };
     if (fs.existsSync(SESSION_FILE)) contextOptions.storageState = SESSION_FILE;

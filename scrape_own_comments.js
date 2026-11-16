@@ -66,12 +66,11 @@ async function main() {
   }
 
   const contextOptions = {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 900 },
   };
   if (fs.existsSync(SESSION_FILE)) contextOptions.storageState = SESSION_FILE;
 
-  const browser = await chromium.launch({ headless: false, args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'] });
+  const browser = await chromium.launch({ headless: false, channel: 'chrome', args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'] });
   const context = await browser.newContext(contextOptions);
   const page = await context.newPage();
 
